@@ -14,10 +14,10 @@
     box-shadow: none;
     outline: none;
 }
-.app-list-item .btn-star {
+.app-list-item .fa-star {
     color: #FFD700;
 }
-.app-list-item .btn-trash {
+.app-list-item .fa-trash-o {
     color: red;
 }
 .app-list-item .fa-heart {
@@ -49,6 +49,6 @@
   color: #FFD700;
 }
 
-.app-list-item.important .btn-star {
+.app-list-item.important .fa-star{
     color: #aeaeae;
 }
