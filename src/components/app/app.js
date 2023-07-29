@@ -20,7 +20,8 @@ export default class App extends Component{
                 {label:'Vue', important:false, id:'guth', like: false},
                 {label:'Angular', important:false, id:'trtr', like: false},
             ],
-            term: ''
+            term: '',
+            filterTag: '',
         }
 
         this.deleteItem = this.deleteItem.bind(this)
@@ -28,6 +29,7 @@ export default class App extends Component{
         this.onToggleImportant = this.onToggleImportant.bind(this)
         this.onToggleLike = this.onToggleLike.bind(this)
         this.onUpdateTerm = this.onUpdateTerm.bind(this)
+        this.changeFilterTag = this.changeFilterTag.bind(this)
 
     }
 
@@ -103,13 +105,25 @@ export default class App extends Component{
         this.setState({term:term})
     }
 
+    filterPosts(items, filterTag){
+        if(filterTag === "like"){
+            return items.filter(item=>item.like)
+        }else{
+            return items
+        }
+    }
+
+    changeFilterTag(newFilterTag){
+        this.setState({filterTag:newFilterTag})
+    }
+
     render() {
-        const {data, term} = this.state
+        const {data, term, filterTag} = this.state
 
         let likedCount = data.filter(item=>item.like).length
         let allPostCount = data.length
 
-        const visiblePost = this.searchPosts(data, term)
+        const visiblePost = this.filterPosts(this.searchPosts(data, term), filterTag)
 
         return (
             <div className="app">
@@ -120,7 +134,8 @@ export default class App extends Component{
                 <div className="search-panel d-flex">
                     <SearchPanel
                         onUpdateTerm={this.onUpdateTerm}/>
-                    <PostStatusFilter/>
+                    <PostStatusFilter
+                        changeFilterStatus={this.changeFilterTag}/>
                 </div>
                 <PostList
                     posts={visiblePost}
