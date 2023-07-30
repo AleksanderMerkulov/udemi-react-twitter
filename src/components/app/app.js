@@ -21,7 +21,7 @@ export default class App extends Component{
                 {label:'Angular', important:false, id:'trtr', like: false},
             ],
             term: '',
-            filterTag: '',
+            filterTag: 'all',
         }
 
         this.deleteItem = this.deleteItem.bind(this)
@@ -135,6 +135,7 @@ export default class App extends Component{
                     <SearchPanel
                         onUpdateTerm={this.onUpdateTerm}/>
                     <PostStatusFilter
+                        filter={filterTag}
                         changeFilterStatus={this.changeFilterTag}/>
                 </div>
                 <PostList
